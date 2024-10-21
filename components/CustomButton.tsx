@@ -9,17 +9,13 @@ import {
 interface CustomButtonProps {
   children: React.ReactNode;
   onPress?: TouchableOpacityProps["onPress"];
-  buttonStyle?: ViewProps["style"];
+  style?: ViewProps["style"];
 }
 
-export function CustomButton({
-  children,
-  onPress,
-  buttonStyle,
-}: CustomButtonProps) {
+export function CustomButton({ children, onPress, style }: CustomButtonProps) {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={[styles.default, buttonStyle]}>{children}</View>
+      <View style={[styles.default, style]}>{children}</View>
     </TouchableOpacity>
   );
 }

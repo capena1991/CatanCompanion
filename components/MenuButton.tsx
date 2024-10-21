@@ -18,7 +18,7 @@ interface MenuButtonProps {
 
 export function MenuButton({ title, icon, onPress }: MenuButtonProps) {
   return (
-    <CustomButton onPress={onPress} buttonStyle={styles.menuButton}>
+    <CustomButton onPress={onPress} style={styles.menuButton}>
       <View style={styles.menuButtonContent}>
         {icon && <Ionicons name={icon} size={24} color="#fcd657" />}
         {title && <Text style={styles.menuButtonText}>{title}</Text>}
@@ -29,7 +29,7 @@ export function MenuButton({ title, icon, onPress }: MenuButtonProps) {
 
 export function MainMenuButton({ title, icon, onPress }: MenuButtonProps) {
   return (
-    <CustomButton onPress={onPress} buttonStyle={styles.menuButton}>
+    <CustomButton onPress={onPress} style={styles.menuButton}>
       <View style={styles.menuButtonContent}>
         {icon && <Ionicons name={icon} size={32} color="#fcd657" />}
         {title && (
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     gap: 5,
   },
   menuButtonText: {
