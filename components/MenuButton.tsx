@@ -13,7 +13,7 @@ type IconSet<IconType> = IconType extends Icon<infer X, infer _Y> ? X : never;
 interface MenuButtonProps {
   title?: string;
   icon?: IconSet<typeof Ionicons>;
-  onPress: TouchableOpacityProps["onPress"];
+  onPress?: TouchableOpacityProps["onPress"];
 }
 
 export function MenuButton({ title, icon, onPress }: MenuButtonProps) {

@@ -8,7 +8,7 @@ import {
 
 interface CustomButtonProps {
   children: React.ReactNode;
-  onPress: TouchableOpacityProps["onPress"];
+  onPress?: TouchableOpacityProps["onPress"];
   buttonStyle?: ViewProps["style"];
 }
 

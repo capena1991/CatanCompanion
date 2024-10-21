@@ -1,4 +1,5 @@
 import { Image, StyleSheet, View } from "react-native";
+import { router } from "expo-router";
 
 import { ThemedView } from "@/components/ThemedView";
 import { MainMenuButton } from "@/components/MenuButton";
@@ -14,18 +15,14 @@ export default function Index() {
         <MainMenuButton
           icon="add-circle-outline"
           title="New Game"
-          onPress={() => {}}
+          onPress={() => router.navigate("/game")}
         />
         <MainMenuButton
           icon="chevron-forward-circle-outline"
           title="Last Game"
-          onPress={() => {}}
+          onPress={() => router.navigate("/game")}
         />
-        <MainMenuButton
-          icon="list-circle-outline"
-          title="All Games"
-          onPress={() => {}}
-        />
+        <MainMenuButton icon="list-circle-outline" title="All Games" />
       </View>
     </ThemedView>
   );
