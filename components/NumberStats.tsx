@@ -1,22 +1,26 @@
 import { View, Text, StyleSheet } from "react-native";
 import { CustomButton } from "./CustomButton";
-import { ThemedText } from "./ThemedText";
 import { Ionicons } from "@expo/vector-icons";
 import { useThemeColor } from "@/hooks/useThemeColor";
 
 interface NumberStatsProps {
-  number: 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+  number: number;
   relativeFrequency: number;
+  onAdd: () => void;
 }
 
-export function NumberStats({ number, relativeFrequency }: NumberStatsProps) {
+export function NumberStats({
+  number,
+  relativeFrequency,
+  onAdd,
+}: NumberStatsProps) {
   const textColor = useThemeColor({}, "text");
 
   const expectedFreq = Math.min(number - 1, 13 - number);
 
   return (
     <View style={styles.numberStatsContainer}>
-      <CustomButton style={styles.numberButton}>
+      <CustomButton style={styles.numberButton} onPress={onAdd}>
         <Text style={styles.numberButtonText}>{"" + number}</Text>
       </CustomButton>
       <View style={styles.numberStats}>
