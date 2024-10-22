@@ -5,15 +5,13 @@ import { router } from "expo-router";
 import { NumberStats } from "@/components/NumberStats";
 import { ThemedView } from "@/components/ThemedView";
 import { useGameStats } from "@/hooks/useGameStats";
-import { ThemedText } from "@/components/ThemedText";
 import { MenuButton } from "@/components/MenuButton";
-
-const formatStat = (x: number) => (isNaN(x) ? "—" : Math.round(x * 10) / 10);
+import { SingleSummaryStat } from "@/components/SingleSummaryStat";
 
 export default function Game({}) {
   const [diceThrows, setDiceThrows] = useState<number[]>([]);
 
-  const { actual, expected } = useGameStats(diceThrows);
+  const { actual, expected, chiSquared } = useGameStats(diceThrows);
 
   return (
     <ThemedView style={styles.statsContainer}>
@@ -43,6 +41,13 @@ export default function Game({}) {
           expected={expected.variance}
           actual={actual.variance}
         />
+        <SingleSummaryStat name="χ²" expected={"<18.3"} actual={chiSquared.x} />
+        <SingleSummaryStat
+          name="p-value"
+          expected=">5%"
+          actual={chiSquared.pValue}
+          percentage
+        />
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.singleButtonContainer}>
@@ -71,27 +76,6 @@ export default function Game({}) {
   );
 }
 
-interface SingleSummaryStatProps {
-  name: string;
-  expected: number;
-  actual: number;
-}
-function SingleSummaryStat({ name, expected, actual }: SingleSummaryStatProps) {
-  return (
-    <View style={styles.singleSummaryStat}>
-      <ThemedText style={[styles.statText, styles.statNameText]}>
-        {name}
-      </ThemedText>
-      <ThemedText style={[styles.statText, styles.statExpectedText]}>
-        {formatStat(expected)}
-      </ThemedText>
-      <ThemedText style={[styles.statText, styles.statActualText]}>
-        {formatStat(actual)}
-      </ThemedText>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   statsContainer: {
     display: "flex",
@@ -109,22 +93,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
-  },
-  singleSummaryStat: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  statText: {
-    fontSize: 20,
-  },
-  statNameText: {
-    fontWeight: "bold",
-    marginBottom: 5,
-  },
-  statExpectedText: {},
-  statActualText: {
-    color: "rgba(252, 214, 87, 0.6)",
   },
   buttonsContainer: {
     display: "flex",
