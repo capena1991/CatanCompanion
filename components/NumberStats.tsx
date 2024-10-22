@@ -27,7 +27,11 @@ export function NumberStats({
         <View
           style={[
             styles.numberActualStatsBar,
-            { width: `${relativeFrequency * 100}%` },
+            {
+              width: isNaN(relativeFrequency)
+                ? 0
+                : `${relativeFrequency * 100}%`,
+            },
           ]}
         >
           <Text></Text>
