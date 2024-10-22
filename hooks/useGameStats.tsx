@@ -128,7 +128,7 @@ export function useGameStats(diceThrows: number[]) {
 
   const chiSquared = useMemo(
     () => chiSquaredTest(actualAbsFreqs, expectedAbsFreqs),
-    [diceThrows.length, actualAbsFreqs, expectedAbsFreqs]
+    [actualAbsFreqs, expectedAbsFreqs]
   );
 
   return {
