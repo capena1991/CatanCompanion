@@ -9,13 +9,21 @@ import {
 interface CustomButtonProps {
   children: React.ReactNode;
   onPress?: TouchableOpacityProps["onPress"];
+  disabled?: boolean;
   style?: ViewProps["style"];
 }
 
-export function CustomButton({ children, onPress, style }: CustomButtonProps) {
+export function CustomButton({
+  children,
+  onPress,
+  style,
+  disabled,
+}: CustomButtonProps) {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={[styles.default, style]}>{children}</View>
+    <TouchableOpacity onPress={onPress} disabled={disabled}>
+      <View style={[styles.default, style, disabled ? styles.disabled : {}]}>
+        {children}
+      </View>
     </TouchableOpacity>
   );
 }
@@ -28,5 +36,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     color: "#ffffff",
     fontSize: 24,
+  },
+  disabled: {
+    backgroundColor: "#625053",
   },
 });

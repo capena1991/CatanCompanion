@@ -14,11 +14,21 @@ interface MenuButtonProps {
   title?: string;
   icon?: IconSet<typeof Ionicons>;
   onPress?: TouchableOpacityProps["onPress"];
+  disabled?: boolean;
 }
 
-export function MenuButton({ title, icon, onPress }: MenuButtonProps) {
+export function MenuButton({
+  title,
+  icon,
+  onPress,
+  disabled,
+}: MenuButtonProps) {
   return (
-    <CustomButton onPress={onPress} style={styles.menuButton}>
+    <CustomButton
+      onPress={onPress}
+      disabled={disabled}
+      style={styles.menuButton}
+    >
       <View style={styles.menuButtonContent}>
         {icon && <Ionicons name={icon} size={24} color="#fcd657" />}
         {title && <Text style={styles.menuButtonText}>{title}</Text>}
@@ -27,9 +37,18 @@ export function MenuButton({ title, icon, onPress }: MenuButtonProps) {
   );
 }
 
-export function MainMenuButton({ title, icon, onPress }: MenuButtonProps) {
+export function MainMenuButton({
+  title,
+  icon,
+  onPress,
+  disabled,
+}: MenuButtonProps) {
   return (
-    <CustomButton onPress={onPress} style={styles.menuButton}>
+    <CustomButton
+      onPress={onPress}
+      disabled={disabled}
+      style={styles.menuButton}
+    >
       <View style={styles.menuButtonContent}>
         {icon && <Ionicons name={icon} size={32} color="#fcd657" />}
         {title && (
