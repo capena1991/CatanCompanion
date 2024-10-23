@@ -90,7 +90,10 @@ const getChiSquaredPvalue = (x: number, n = 10): number => {
 
 const WARNING_TOLERANCE = 0.1;
 const REJECT_TOLERANCE = 0.05;
-const chiSquaredTest = (actual: number[], expected: number[]) => {
+const chiSquaredTest = (
+  actual: number[],
+  expected: number[]
+): { x: number; pValue: number; status: "ok" | "warning" | "failed" } => {
   const x = actual.reduce((cum, a, i) => {
     const diff = a - expected[i];
     return cum + (diff * diff) / expected[i];

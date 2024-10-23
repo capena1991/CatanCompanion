@@ -41,12 +41,18 @@ export default function Game({}) {
           expected={expected.variance}
           actual={actual.variance}
         />
-        <SingleSummaryStat name="χ²" expected={"<18.3"} actual={chiSquared.x} />
+        <SingleSummaryStat
+          name="χ²"
+          expected={"<18.3"}
+          actual={chiSquared.x}
+          status={chiSquared.status}
+        />
         <SingleSummaryStat
           name="p-value"
           expected=">5%"
           actual={chiSquared.pValue}
           percentage
+          status={chiSquared.status}
         />
       </View>
       <View style={styles.buttonsContainer}>
