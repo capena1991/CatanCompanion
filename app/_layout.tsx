@@ -16,10 +16,12 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen
           name="game/[id]"
-          options={{
+          options={({ route }) => ({
             headerStyle: { backgroundColor: "#c35f3d" },
-            headerTitle: "Game Stats",
-          }}
+            headerTitle: `Game Stats - ${
+              (route?.params as { id: string } | undefined)?.id ?? "Invalid"
+            }`,
+          })}
         />
       </Stack>
     </ThemeProvider>
