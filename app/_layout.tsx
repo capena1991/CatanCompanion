@@ -15,7 +15,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen
-          name="game"
+          name="game/[id]"
           options={{
             headerStyle: { backgroundColor: "#c35f3d" },
             headerTitle: "Game Stats",

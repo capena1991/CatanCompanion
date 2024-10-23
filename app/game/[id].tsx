@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 
 import { NumberStats } from "@/components/NumberStats";
 import { ThemedView } from "@/components/ThemedView";
@@ -8,7 +8,9 @@ import { useGameStats } from "@/hooks/useGameStats";
 import { MenuButton } from "@/components/MenuButton";
 import { SingleSummaryStat } from "@/components/SingleSummaryStat";
 
-export default function Game({}) {
+export default function Game() {
+  const { id } = useLocalSearchParams();
+
   const [diceRolls, setDiceRolls] = useState<number[]>([]);
 
   const { actual, expected, chiSquared } = useGameStats(diceRolls);

@@ -15,12 +15,16 @@ export default function Index() {
         <MainMenuButton
           icon="add-circle-outline"
           title="New Game"
-          onPress={() => router.navigate("/game")}
+          onPress={() =>
+            router.navigate({ pathname: "/game/[id]", params: { id: "game1" } })
+          }
         />
         <MainMenuButton
           icon="chevron-forward-circle-outline"
           title="Last Game"
-          onPress={() => router.navigate("/game")}
+          onPress={() =>
+            router.navigate({ pathname: "/game/[id]", params: { id: "game2" } })
+          }
         />
         <MainMenuButton icon="list-circle-outline" title="All Games" />
       </View>
