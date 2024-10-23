@@ -16,21 +16,21 @@ const EXPECTED_RELATIVE_FREQS = [
   2 / 36,
   1 / 36,
 ];
-const getExpectedAbsoluteFreqs = (numberOfThrows: number) =>
-  EXPECTED_RELATIVE_FREQS.map((f) => f * numberOfThrows);
+const getExpectedAbsoluteFreqs = (numberOfRoll: number) =>
+  EXPECTED_RELATIVE_FREQS.map((f) => f * numberOfRoll);
 
-const getAbsoluteFreqs = (diceThrows: number[]) => {
+const getAbsoluteFreqs = (diceRolls: number[]) => {
   const res = new Array<number>(11).fill(0);
-  diceThrows.forEach((n) => {
+  diceRolls.forEach((n) => {
     res[diceNumberIndex(n)] += 1;
   });
   return res;
 };
 
 const getStats = (absoluteFreqs: number[]) => {
-  const numberOfThrows = absoluteFreqs.reduce((f1, f2) => f1 + f2);
+  const numberOfRolls = absoluteFreqs.reduce((f1, f2) => f1 + f2);
 
-  const relativeFreqs = absoluteFreqs.map((f) => f / numberOfThrows);
+  const relativeFreqs = absoluteFreqs.map((f) => f / numberOfRolls);
 
   const maxFreq = Math.max(...absoluteFreqs);
   const normalizedFreqs = absoluteFreqs.map((f) => f / maxFreq);
@@ -40,10 +40,10 @@ const getStats = (absoluteFreqs: number[]) => {
   const deviations = absoluteFreqs.map((_, i) => diceNumber(i) - mean);
   const standardDeviation =
     deviations.reduce((cum, d, i) => cum + Math.abs(d) * absoluteFreqs[i], 0) /
-    numberOfThrows;
+    numberOfRolls;
   const variance =
     deviations.reduce((cum, d, i) => cum + d * d * absoluteFreqs[i], 0) /
-    numberOfThrows;
+    numberOfRolls;
 
   return {
     absoluteFreqs,
@@ -113,10 +113,10 @@ const chiSquaredTest = (
   };
 };
 
-export function useGameStats(diceThrows: number[]) {
+export function useGameStats(diceRolls: number[]) {
   const expectedAbsFreqs = useMemo(
-    () => getExpectedAbsoluteFreqs(diceThrows.length),
-    [diceThrows.length]
+    () => getExpectedAbsoluteFreqs(diceRolls.length),
+    [diceRolls.length]
   );
   const expected = useMemo(
     () => getStats(expectedAbsFreqs),
@@ -124,8 +124,8 @@ export function useGameStats(diceThrows: number[]) {
   );
 
   const actualAbsFreqs = useMemo(
-    () => getAbsoluteFreqs(diceThrows),
-    [diceThrows]
+    () => getAbsoluteFreqs(diceRolls),
+    [diceRolls]
   );
   const actual = useMemo(() => getStats(actualAbsFreqs), [actualAbsFreqs]);
 

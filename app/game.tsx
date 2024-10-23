@@ -9,9 +9,9 @@ import { MenuButton } from "@/components/MenuButton";
 import { SingleSummaryStat } from "@/components/SingleSummaryStat";
 
 export default function Game({}) {
-  const [diceThrows, setDiceThrows] = useState<number[]>([]);
+  const [diceRolls, setDiceRolls] = useState<number[]>([]);
 
-  const { actual, expected, chiSquared } = useGameStats(diceThrows);
+  const { actual, expected, chiSquared } = useGameStats(diceRolls);
 
   return (
     <ThemedView style={styles.statsContainer}>
@@ -21,7 +21,7 @@ export default function Game({}) {
             key={i}
             number={i + 2}
             relativeFrequency={actual.normalizedFreqs[i]}
-            onAdd={() => setDiceThrows([...diceThrows, i + 2])}
+            onAdd={() => setDiceRolls([...diceRolls, i + 2])}
           />
         ))}
       </View>
@@ -60,14 +60,14 @@ export default function Game({}) {
           <MenuButton
             title="Undo"
             icon="arrow-undo-circle-outline"
-            onPress={() => setDiceThrows(diceThrows.slice(0, -1))}
+            onPress={() => setDiceRolls(diceRolls.slice(0, -1))}
           />
         </View>
         <View style={styles.singleButtonContainer}>
           <MenuButton
             title="Reset"
             icon="refresh-circle-outline"
-            onPress={() => setDiceThrows([])}
+            onPress={() => setDiceRolls([])}
           />
         </View>
         <View style={styles.singleButtonContainer}>
