@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   },
   menuButtonText: {
     color: "#fcd657",
+    fontSize: 18,
   },
   mainMenuButtonText: {
     fontSize: 32,
