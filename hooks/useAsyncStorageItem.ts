@@ -1,7 +1,11 @@
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 
-export function useAsyncStorageItem<T>(key: string, defaultValue: T) {
+export function useAsyncStorageItem<T>(
+  key: string,
+  defaultValue: T,
+  onCreate?: () => void
+) {
   const [value, setValueState] = useState<T>(defaultValue);
 
   const { getItem, setItem } = useAsyncStorage(key);
@@ -28,6 +32,7 @@ export function useAsyncStorageItem<T>(key: string, defaultValue: T) {
 
     if (item === null) {
       await setValue(defaultValue);
+      onCreate?.();
       return;
     }
 
