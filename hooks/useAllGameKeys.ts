@@ -11,10 +11,7 @@ export function useAllGameKeys() {
     refetch,
   } = useQuery({
     queryKey: ["all-game-keys"],
-    queryFn: async () => {
-      console.log("fetching all keys");
-      return AsyncStorage.getAllKeys();
-    },
+    queryFn: async () => AsyncStorage.getAllKeys(),
     staleTime: ONE_MINUTE,
   });
 
