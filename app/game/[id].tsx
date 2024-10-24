@@ -7,6 +7,7 @@ import { useGameStats } from "@/hooks/useGameStats";
 import { MenuButton } from "@/components/MenuButton";
 import { SingleSummaryStat } from "@/components/SingleSummaryStat";
 import { useGameData } from "@/hooks/useGameData";
+import { useMemo } from "react";
 
 const getGameKey = (id: string | string[]) => {
   const singleId = Array.isArray(id) ? id[0] : id;
@@ -18,7 +19,7 @@ const getGameKey = (id: string | string[]) => {
 
 export default function Game() {
   const { id } = useLocalSearchParams();
-  const gameKey = getGameKey(id);
+  const gameKey = useMemo(() => getGameKey(id), [id]);
 
   const { diceRolls, setDiceRolls } = useGameData(gameKey);
 
