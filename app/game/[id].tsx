@@ -8,9 +8,17 @@ import { MenuButton } from "@/components/MenuButton";
 import { SingleSummaryStat } from "@/components/SingleSummaryStat";
 import { useGameData } from "@/hooks/useGameData";
 
+const getGameKey = (id: string | string[]) => {
+  const singleId = Array.isArray(id) ? id[0] : id;
+  if (singleId === "new-game") {
+    return new Date().toISOString();
+  }
+  return singleId;
+};
+
 export default function Game() {
   const { id } = useLocalSearchParams();
-  const gameKey = Array.isArray(id) ? id[0] : id;
+  const gameKey = getGameKey(id);
 
   const { diceRolls, setDiceRolls } = useGameData(gameKey);
 

@@ -3,8 +3,11 @@ import { router } from "expo-router";
 
 import { ThemedView } from "@/components/ThemedView";
 import { MainMenuButton } from "@/components/MenuButton";
+import { useAllGameKeys } from "@/hooks/useAllGameKeys";
 
 export default function Index() {
+  const { lastKey, isLoading } = useAllGameKeys();
+
   return (
     <ThemedView style={styles.menuScreen}>
       <Image
@@ -16,17 +19,29 @@ export default function Index() {
           icon="add-circle-outline"
           title="New Game"
           onPress={() =>
-            router.navigate({ pathname: "/game/[id]", params: { id: "game1" } })
+            router.navigate({
+              pathname: "/game/[id]",
+              params: { id: "new-game" },
+            })
           }
+          disabled={isLoading}
         />
         <MainMenuButton
           icon="chevron-forward-circle-outline"
           title="Last Game"
           onPress={() =>
-            router.navigate({ pathname: "/game/[id]", params: { id: "game2" } })
+            router.navigate({
+              pathname: "/game/[id]",
+              params: { id: lastKey ?? "" },
+            })
           }
+          disabled={isLoading || !lastKey}
         />
-        <MainMenuButton icon="list-circle-outline" title="All Games" />
+        <MainMenuButton
+          icon="list-circle-outline"
+          title="All Games"
+          onPress={() => router.navigate("/list")}
+        />
       </View>
     </ThemedView>
   );
