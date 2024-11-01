@@ -32,6 +32,7 @@ export default function Game() {
           <NumberStats
             key={i}
             number={i + 2}
+            absoluteFrequency={actual.absoluteFreqs[i]}
             relativeFrequency={actual.normalizedFreqs[i]}
             onAdd={() => setDiceRolls([...diceRolls, i + 2])}
           />
@@ -39,14 +40,14 @@ export default function Game() {
       </View>
       <View style={styles.summaryStatsContainer}>
         <SingleSummaryStat
+          name="Rolls"
+          expected="—"
+          actual={actual.totalRolls}
+        />
+        <SingleSummaryStat
           name="Mean"
           expected={expected.mean}
           actual={actual.mean}
-        />
-        <SingleSummaryStat
-          name="STD"
-          expected={expected.standardDeviation}
-          actual={actual.standardDeviation}
         />
         <SingleSummaryStat
           name="Variance"

@@ -28,9 +28,9 @@ const getAbsoluteFreqs = (diceRolls: number[]) => {
 };
 
 const getStats = (absoluteFreqs: number[]) => {
-  const numberOfRolls = absoluteFreqs.reduce((f1, f2) => f1 + f2);
+  const totalRolls = absoluteFreqs.reduce((f1, f2) => f1 + f2);
 
-  const relativeFreqs = absoluteFreqs.map((f) => f / numberOfRolls);
+  const relativeFreqs = absoluteFreqs.map((f) => f / totalRolls);
 
   const maxFreq = Math.max(...absoluteFreqs);
   const normalizedFreqs = absoluteFreqs.map((f) => f / maxFreq);
@@ -40,12 +40,13 @@ const getStats = (absoluteFreqs: number[]) => {
   const deviations = absoluteFreqs.map((_, i) => diceNumber(i) - mean);
   const standardDeviation =
     deviations.reduce((cum, d, i) => cum + Math.abs(d) * absoluteFreqs[i], 0) /
-    numberOfRolls;
+    totalRolls;
   const variance =
     deviations.reduce((cum, d, i) => cum + d * d * absoluteFreqs[i], 0) /
-    numberOfRolls;
+    totalRolls;
 
   return {
+    totalRolls,
     absoluteFreqs,
     relativeFreqs,
     normalizedFreqs,

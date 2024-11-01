@@ -2,15 +2,18 @@ import { View, Text, StyleSheet } from "react-native";
 import { CustomButton } from "./CustomButton";
 import { Ionicons } from "@expo/vector-icons";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { ThemedText } from "./ThemedText";
 
 interface NumberStatsProps {
   number: number;
+  absoluteFrequency: number;
   relativeFrequency: number;
   onAdd: () => void;
 }
 
 export function NumberStats({
   number,
+  absoluteFrequency,
   relativeFrequency,
   onAdd,
 }: NumberStatsProps) {
@@ -42,6 +45,7 @@ export function NumberStats({
           ))}
         </View>
       </View>
+      <ThemedText style={styles.numberAbsFreq}>{absoluteFrequency}</ThemedText>
     </View>
   );
 }
@@ -80,5 +84,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "rgba(252, 214, 87, 0.4)",
     height: "100%",
+  },
+  numberAbsFreq: {
+    width: 24,
+    fontSize: 20,
+    color: "rgba(252, 214, 87, 0.6)",
+    textAlign: "right",
+    textAlignVertical: "center",
   },
 });
