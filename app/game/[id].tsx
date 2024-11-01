@@ -8,6 +8,7 @@ import { MenuButton } from "@/components/MenuButton";
 import { SingleSummaryStat } from "@/components/SingleSummaryStat";
 import { useGameData } from "@/hooks/useGameData";
 import { useMemo } from "react";
+import { RollsStrip } from "@/components/RollsStrip";
 
 const getGameKey = (id: string | string[]) => {
   const singleId = Array.isArray(id) ? id[0] : id;
@@ -27,6 +28,7 @@ export default function Game() {
 
   return (
     <ThemedView style={styles.statsContainer}>
+      <RollsStrip rolls={diceRolls} />
       <View style={styles.numberStatsContainer}>
         {new Array(11).fill(null).map((_, i) => (
           <NumberStats
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: "100%",
     padding: 10,
-    gap: 20,
+    gap: 10,
   },
   numberStatsContainer: {
     display: "flex",
